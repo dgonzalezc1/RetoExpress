@@ -15,8 +15,9 @@ Message.init({
 },{
     sequelize,
     modelName: "Message",
-    createdAt: false,
-    updatedAt: 'ts'
+    timestamps: false
+    //createdAt: false,
+    //updatedAt: 'ts'
 });
 
 Message.sync();
