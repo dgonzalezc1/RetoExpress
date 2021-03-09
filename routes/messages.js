@@ -60,8 +60,8 @@ router.delete("/:id", function(req,res, next){
 
 const validateMessage = (message) => {
   const schema = Joi.object({
-    message: Joi.string().min(1).max(100).required(),
-    author: Joi.string().min(2).max(30).required(),
+    message: Joi.string().min(5).max(100).required(),
+    author: Joi.string().regex(/^([a-zA-Z])+[\s]{1}([a-zA-Z])+$/).required().messages({"string.pattern.base": "The author must have a first and last name separated by a space"})
   });
 
   return schema.validate(message);
