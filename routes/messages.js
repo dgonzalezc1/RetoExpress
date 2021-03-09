@@ -3,11 +3,13 @@ const { validate } = require('../lib/sequelize');
 const Message = require('../models/message');
 var router = express.Router();
 
+const Joi = require("joi");
+
 
 /* GET total. */
 router.get('/', function(req, res, next) {
   Message.findAll().then((result) => {
-    res.send('respond with a resource');
+    res.send(result);
   });
 });
 
@@ -43,11 +45,13 @@ router.put("/:id", function(req,res, next){
 });
 
 router.delete("/:id", function(req,res, next){
-  let message = messages.find((message) => message.id === parseInt(req.params.id));
-  if(!message) return res.status(404).send("Not Found");
+  //let message = messages.find((message) => message.id === parseInt(req.params.id));
+  //if(!message) return res.status(404).send("Not Found");
 
-  const index = messages.indexOf(message);
-  messages.splice(index,c1);
+  Message.destroy({where:{id: req.params.id}});
+  
+  //const index = messages.indexOf(message);
+  //messages.splice(index,c1);
 
   res.send(message);
 });
